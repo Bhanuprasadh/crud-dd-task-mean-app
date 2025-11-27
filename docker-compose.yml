@@ -10,6 +10,7 @@ services:
       - mongodb_data:/data/db
 
   backend:
+    image: ${DOCKER_USERNAME}/mean-backend:latest
     build: ./backend
     container_name: backend
     ports:
@@ -21,6 +22,7 @@ services:
     restart: always
 
   frontend:
+    image: ${DOCKER_USERNAME}/mean-frontend:latest
     build: ./frontend
     container_name: frontend
     ports:

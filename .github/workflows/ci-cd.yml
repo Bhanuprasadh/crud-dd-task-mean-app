@@ -52,11 +52,15 @@ jobs:
 
             - name: Deploy to VM
               uses: appleboy/ssh-action@master
+              env:
+                  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
               with:
                   host: ${{ secrets.HOST_IP }}
                   username: ${{ secrets.SSH_USER }}
                   key: ${{ secrets.SSH_KEY }}
+                  envs: DOCKER_USERNAME
                   script: |
+                      export DOCKER_USERNAME=$DOCKER_USERNAME
                       # Pull the latest images
                       docker-compose pull
                       # Restart containers
