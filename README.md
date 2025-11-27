@@ -1,94 +1,74 @@
 # MEAN Stack CRUD Application Deployment
 
-This repository contains the source code and deployment configuration for a MEAN (MongoDB, Express, Angular, Node.js) stack application.
+This repository contains the source code and deployment configuration for a MEAN (MongoDB, Express, Angular, Node.js) stack application. The application is containerized using Docker and deployed via a CI/CD pipeline using GitHub Actions.
 
-## Project Structure
+## 📂 Project Structure
 
 - `frontend/`: Angular 15 application.
 - `backend/`: Node.js/Express application.
 - `docker-compose.yml`: Orchestration for local and production deployment.
 - `.github/workflows/ci-cd.yml`: GitHub Actions pipeline for automated deployment.
+- `AWS_DEPLOYMENT.md`: Specific guide for deploying to AWS EC2.
 
-## Prerequisites
+## 🚀 Deployment Overview
 
+The application is deployed on an Ubuntu Virtual Machine (AWS EC2) using Docker Compose. A GitHub Actions pipeline handles the continuous integration and deployment.
+
+### Architecture
+- **Frontend**: Angular app served via Nginx (Port 80).
+- **Backend**: Node.js/Express API (Port 8080).
+- **Database**: MongoDB (Port 27017).
+- **Reverse Proxy**: Nginx routes `/api` requests to the backend.
+
+## 🛠 Setup & Installation
+
+### Prerequisites
 - Docker & Docker Compose
-- Node.js (for local development)
-- A GitHub account
-- A Docker Hub account
-- An Ubuntu Virtual Machine (AWS EC2, Azure VM, etc.)
+- GitHub Account
+- Docker Hub Account
+- Cloud VM (AWS EC2 recommended)
 
-## Setup Instructions
-
-### 1. Repository Setup
-
-1.  Create a new repository on GitHub.
-2.  Initialize git in this folder and push the code:
-    ```bash
-    git init
-    git add .
-    git commit -m "Initial commit"
-    git branch -M main
-    git remote add origin <YOUR_GITHUB_REPO_URL>
-    git push -u origin main
-    ```
-
-### 2. Docker Hub Setup
-
-1.  Create two repositories in your Docker Hub:
-    - `mean-backend`
-    - `mean-frontend`
-
-### 3. VM Setup (Ubuntu)
-
-1.  Provision an Ubuntu VM on your cloud provider.
-2.  SSH into the VM and install Docker & Docker Compose:
-    ```bash
-    sudo apt-get update
-    sudo apt-get install -y ca-certificates curl gnupg
-    sudo mkdir -m 0755 -p /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    echo \
-      "deb [arch=\"$(dpkg --print-architecture)\" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose
-    ```
-3.  Ensure your user has permission to run Docker:
-    ```bash
-    sudo usermod -aG docker $USER
-    ```
-    (Log out and log back in for this to take effect).
-
-### 4. GitHub Secrets
-
-Go to your GitHub Repository -> Settings -> Secrets and variables -> Actions -> New repository secret. Add the following:
-
-- `DOCKER_USERNAME`: Your Docker Hub username.
-- `DOCKER_PASSWORD`: Your Docker Hub access token or password.
-- `HOST_IP`: The public IP address of your VM.
-- `SSH_USER`: The username to SSH into your VM (e.g., `ubuntu`).
-- `SSH_KEY`: The private SSH key (content of `.pem` file) to access your VM.
-
-### 5. Deployment
-
-Once the secrets are set, any push to the `main` branch will trigger the CI/CD pipeline.
-
-1.  **Build**: GitHub Actions will build the Docker images for frontend and backend.
-2.  **Push**: Images will be pushed to Docker Hub.
-3.  **Deploy**: The workflow will SSH into your VM, copy the `docker-compose.yml`, pull the new images, and restart the containers.
-
-## Accessing the Application
-
-Open your browser and navigate to `http://<YOUR_VM_IP>`.
-- The Angular frontend is served on port 80.
-- API requests are proxied to the backend via Nginx.
-
-## Local Development
-
-To run the application locally using Docker Compose:
-
+### Local Development
+To run the application locally:
 ```bash
 docker-compose up --build
 ```
-
 Access the app at `http://localhost`.
+
+## ☁️ Production Deployment
+
+For detailed steps on setting up the AWS infrastructure, please refer to [AWS_DEPLOYMENT.md](./AWS_DEPLOYMENT.md).
+
+### Quick Summary
+1.  **VM Setup**: Provision an Ubuntu VM and install Docker.
+2.  **Secrets**: Configure `DOCKER_USERNAME`, `DOCKER_PASSWORD`, `HOST_IP`, `SSH_USER`, and `SSH_KEY` in GitHub Secrets.
+3.  **Deploy**: Push to the `main` branch to trigger the pipeline.
+
+## 📸 Deliverables & Screenshots
+
+### 1. CI/CD Configuration & Execution
+*Screenshot of the GitHub Actions workflow run showing success.*
+![CI/CD Workflow](https://via.placeholder.com/800x400?text=Place+CI/CD+Workflow+Screenshot+Here)
+
+### 2. Docker Image Build & Push
+*Screenshot of Docker Hub showing the pushed repositories (`mean-backend`, `mean-frontend`).*
+![Docker Hub](https://via.placeholder.com/800x400?text=Place+Docker+Hub+Screenshot+Here)
+
+### 3. Application Deployment & UI
+*Screenshot of the running application accessed via the VM's public IP.*
+![Application UI](https://via.placeholder.com/800x400?text=Place+Application+UI+Screenshot+Here)
+
+### 4. Infrastructure
+*Screenshot of the AWS EC2 instance or terminal showing running containers (`docker ps`).*
+![Infrastructure](https://via.placeholder.com/800x400?text=Place+Infrastructure+Screenshot+Here)
+
+## 📝 API Endpoints
+
+- `GET /api/tutorials`: Retrieve all tutorials.
+- `GET /api/tutorials/:id`: Retrieve a tutorial by ID.
+- `POST /api/tutorials`: Create a new tutorial.
+- `PUT /api/tutorials/:id`: Update a tutorial.
+- `DELETE /api/tutorials/:id`: Delete a tutorial.
+
+## 📜 License
+ISC
