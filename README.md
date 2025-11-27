@@ -51,19 +51,19 @@ For detailed steps on setting up the AWS infrastructure, please refer to [AWS_DE
 
 ### 1. CI/CD Configuration & Execution
 *Screenshot of the GitHub Actions workflow run showing success.*
-![CI/CD Workflow](https://via.placeholder.com/800x400?text=Place+CI/CD+Workflow+Screenshot+Here)
+![CI/CD Workflow](screenshots/cicd.png)
 
 ### 2. Docker Image Build & Push
 *Screenshot of Docker Hub showing the pushed repositories (`mean-backend`, `mean-frontend`).*
-![Docker Hub](https://via.placeholder.com/800x400?text=Place+Docker+Hub+Screenshot+Here)
+![Docker Hub](screenshots/dockerhub.png)
 
 ### 3. Application Deployment & UI
 *Screenshot of the running application accessed via the VM's public IP.*
-![Application UI](https://via.placeholder.com/800x400?text=Place+Application+UI+Screenshot+Here)
+![Application UI](screenshots/ui.png)
 
 ### 4. Infrastructure
 *Screenshot of the AWS EC2 instance or terminal showing running containers (`docker ps`).*
-![Infrastructure](https://via.placeholder.com/800x400?text=Place+Infrastructure+Screenshot+Here)
+![Infrastructure](screenshots/infrastructure.png)
 
 ## 📝 API Endpoints
 
