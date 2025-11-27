@@ -1,5 +1,8 @@
 # MEAN Stack CRUD Application Deployment
 
+![CI/CD Pipeline](https://github.com/Bhanuprasadh/crud-dd-task-mean-app/actions/workflows/ci-cd.yml/badge.svg)
+
+
 This repository contains the source code and deployment configuration for a MEAN (MongoDB, Express, Angular, Node.js) stack application. The application is containerized using Docker and deployed via a CI/CD pipeline using GitHub Actions.
 
 ## 📂 Project Structure
